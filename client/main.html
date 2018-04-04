@@ -54,10 +54,10 @@
     {{#each tasks}}
       <div class = "col-md-3 col-xs-12" id = "task">
        <div class = "thumbnail">
-         <p><a href="/task/{{_id}}"><div class = "style js_task"> <b> name : </b> {{task_name}}</div></a></p>
-         <p> <b>Deadline:</b> {{task_deadline}} </p>
-         <p> <b>Duedate: </b> {{task_duedate}}  </p>
-         <p> <b>Priority: </b>{{task_priority}} </p>
+         <p><a href="/task/{{_id}}"><div class = "style js_task"> <b> name : </b> {{task_name}}</div></a></p><br />
+         <p> <b>Deadline:</b> {{task_deadline}} </p><br />
+         <p> <b>Duedate: </b> {{task_duedate}}  </p><br />
+         <p> <b>Priority: </b>{{task_priority}} </p><br />
          <input type="checkbox" name = "taskDone" class = "js_complete_task" checked = {{task_complete}}> <b style = "color:darkgreen; font-size: 13px;">Finished</b> <br />
          <button class="js-Edit-task btn btn-primary" disabled = {{task_complete}}> EditTask </button>
          <button class="js-del-task btn btn-warning" disabled = {{task_complete}} style = "float: right;">DeleteTask</button>   

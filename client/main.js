@@ -82,7 +82,7 @@ Template.tasksview.helpers({
   tasks:function(){
      if (Meteor.user()){
       var id = Meteor.user()._id;
-      return Tasks.find({createdBy: id }, {sort: {task_priority: -1  , task_duedate: 1} });         
+      return Tasks.find({createdBy: id }, {sort: { task_complete:false , task_priority: -1} });         
      }
     }
 });
