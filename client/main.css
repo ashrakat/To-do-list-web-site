@@ -1,0 +1,42 @@
+/* CSS declarations go here */
+.login{
+margin-top: 15px;
+margin-left:5px;
+}
+
+.form-inline{
+margin-top:70px;
+float: right;
+margin-right:-80px;
+}
+
+.navbar-default{
+   background-color: rgb(159,80,80);
+}
+
+a,strong{
+ color: white;
+}
+
+.navbar-brand{
+ font-style: italic;
+  font-size: 1.5em;
+}
+
+.container{
+ margin-top:80px;
+}
+.adjust_tasks{
+ margin-top: 15px;
+}
+
+.style{
+ color: black;
+ text-decoration: none;
+ border: none;
+}
+
+a:hover{
+ text-decoration: none;
+ color: blue;
+}

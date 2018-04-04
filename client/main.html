@@ -1,0 +1,193 @@
+<head>
+  <title>to-do-list</title>
+</head>
+
+<body>
+ 
+</body>
+
+<template name="ApplicationLayout">
+  {{> yield "navbar"}}
+  {{> yield "main"}}
+  
+</template>
+
+
+<template name="welcome">
+  <div class="container">
+     <div class="jumbotron">
+      <h1> Hello, hope you enjoy our website!</h1>
+      <a href="/tasks" class="btn btn-info">Give a shot</a>
+    </div>      
+  </div>
+</template> 
+
+
+<template name = "navbar">
+ <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="/"><strong>To-do-list</strong></a>
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse nav navbar-nav">
+	  <div class = "login">
+	   {{> loginButtons}}
+	   </div>
+	</div>
+ </div>
+</template>
+
+
+<!-- how tasks would show to the current user-->
+ <template name = "tasksview">
+ <div class = "container">
+       <h1> Welcome {{username}}!</h1>
+   {{#if currentUser}}
+   <h6 style = "color: gray;"> if you want to see the description click on name </h6>
+   <button class="js-show-task-form btn btn-success" >add task</button>
+    <div class = "row adjust_tasks">
+    {{#each tasks}}
+      <div class = "col-md-3 col-xs-12" id = "task">
+       <div class = "thumbnail">
+         <p><a href="/task/{{_id}}"><div class = "style js_task"> <b> name : </b> {{task_name}}</div></a></p>
+         <p> <b>Deadline:</b> {{task_deadline}} </p>
+         <p> <b>Duedate: </b> {{task_duedate}}  </p>
+         <p> <b>Priority: </b>{{task_priority}} </p>
+         <input type="checkbox" name = "taskDone" class = "js_complete_task" checked = {{task_complete}}> <b style = "color:darkgreen; font-size: 13px;">Finished</b> <br />
+         <button class="js-Edit-task btn btn-primary" disabled = {{task_complete}}> EditTask </button>
+         <button class="js-del-task btn btn-warning" disabled = {{task_complete}} style = "float: right;">DeleteTask</button>   
+       </div>  <!-- End of thumbnail-->
+      </div>   <!-- End of col-->
+      {{/each}}
+    </div>     <!-- End of row-->
+   {{/if}}
+   </div>   <!-- End of the container-->
+</template>
+
+<!-- new task form to be added -->
+<template name="task_add_form">
+<div class = "container">
+<div class="modal fade" id="task-add-form">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">
+        </div>
+      </div>
+      <div class="modal-body">       
+        <form class="js-add-task">
+          <div class="form-group">
+            <label for="task-title">Task Name:</label>
+            <input type="text" class="form-control" id="task_title" placeholder="title" name="task_title"/>
+        </div>
+        <div class="form-group">
+         <label for="task_description">Task Description:</label>
+          <textarea class="form-control" id="task_description" placeholder="Describe your task here" name="task_description"></textarea>
+        </div>
+         <div class="form-group">
+         <label for="task_deadline">Task Deadline:</label>
+         <input type="date" class="form-control" id="task_deadline" name = "deadline">
+        </div>
+        
+         <div class="form-group">
+         <label for="task_Duedate">Task Duedate:</label>
+         <input type="number" class="form-control" id="task_duedate" name = "duedate" min = 1>
+        </div>
+        
+         <div class="form-group">
+         <label for="task_priority">Task Priority:</label>
+         <input type="number" class="form-control" id="task_priority" name = "priority" min = "1" max = "5">
+        </div>
+        
+          <button class="btn btn-success">save</button>
+        </form> 
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-warning" data-dismiss="modal">cancel</button>
+      </div>  
+      </div>
+    </div>
+  </div>
+  </div>
+</template>
+
+<!-- view single task-->
+<template name="task">
+ <div class = "container">
+   <div class = "row">
+    <div class = "col-md-6 col-xs-12 col-md-offset-3">
+      <div class = "thumbnail">
+          <div style = "padding: 15px;">
+          <h4> <b>Name</b>:  {{task_name}}</h4>
+          <br />
+         <ul>
+          <li> <b>Description: </b> {{task_description}} </li> <br/>
+          <li> <b>Deadline:</b> {{task_deadline}} </li><br/>
+          <li> <b>Duedate: </b> {{task_duedate}}  </li><br/>
+          <li> <b>Priority: </b>{{task_priority}} </li><br/>    
+         </ul>
+              <center><p style = "display:{{task_complete}} font-size: 16px; color: darkgreen"><b>You have done it already
+                  <span class="glyphicon">&#xe013;</span></b></p></center>
+         </div>          
+      </div> <!-- End of thumbnail-->
+    </div>   <!-- End of columns-->
+   </div>    <!-- End of rows-->
+   <center><a href = "/"><button class = "btn btn-success js-back"> back &#8617;</button></a></center>
+ </div>     <!-- End of container-->        
+</template>
+
+
+<!-- Edit a task -->
+<template name="taskEditform">
+<div class = "container">
+<div class="modal fade" id="task-edit-form">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">
+        </div>
+      </div>
+      <div class="modal-body">       
+        <form class="js-Edit-task">
+         {{#each task}}
+          <div class="form-group">
+            <label for="task-title">Task Name:</label>
+            <input type="text" class="form-control" id="task_title" value = {{task_name}} name="task_title"/>
+        </div>
+        <div class="form-group">
+         <label for="task_description">Task Description:</label>
+          <textarea class="form-control" id="task_description" value = {{task_description}} name="task_description"></textarea>
+        </div>
+         <div class="form-group">
+         <label for="task_deadline">Task Deadline:</label>
+         <input type="date" class="form-control" id="task_deadline"  value = {{task_deadline}} name = "deadline">
+        </div>
+        
+         <div class="form-group">
+         <label for="task_Duedate">Task Duedate:</label>
+         <input type="number" class="form-control" id="task_duedate" value = {{task_duedate}} name = "duedate" min = 1>
+        </div>
+        
+         <div class="form-group">
+         <label for="task_priority">Task Priority:</label>
+         <input type="number" class="form-control" id="task_priority" value = {{task_priority}} name = "priority" min = "1" max = "5">
+        </div>
+        
+          <button class="btn btn-success">save</button>
+        {{/each}}
+        </form> 
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-warning" data-dismiss="modal">cancel</button>
+      </div>  
+      </div>
+    </div>
+  </div>
+  </div>
+</template>
+
