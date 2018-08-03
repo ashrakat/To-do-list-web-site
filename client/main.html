@@ -3,13 +3,13 @@
 </head>
 
 <body>
- 
+
 </body>
 
 <template name="ApplicationLayout">
   {{> yield "navbar"}}
   {{> yield "main"}}
-  
+
 </template>
 
 
@@ -18,9 +18,9 @@
      <div class="jumbotron">
       <h1> Hello, hope you enjoy our website!</h1>
       <a href="/tasks" class="btn btn-info">Give a shot</a>
-    </div>      
+    </div>
   </div>
-</template> 
+</template>
 
 
 <template name = "navbar">
@@ -60,7 +60,7 @@
          <p> <b>Priority: </b>{{task_priority}} </p><br />
          <input type="checkbox" name = "taskDone" class = "js_complete_task" checked = {{task_complete}}> <b style = "color:darkgreen; font-size: 13px;">Finished</b> <br />
          <button class="js-Edit-task btn btn-primary" disabled = {{task_complete}}> EditTask </button>
-         <button class="js-del-task btn btn-warning" disabled = {{task_complete}} style = "float: right;">DeleteTask</button>   
+         <button class="js-del-task btn btn-warning" disabled = {{task_complete}} style = "float: right;">DeleteTask</button>
        </div>  <!-- End of thumbnail-->
       </div>   <!-- End of col-->
       {{/each}}
@@ -79,7 +79,7 @@
         <div class="modal-title">
         </div>
       </div>
-      <div class="modal-body">       
+      <div class="modal-body">
         <form class="js-add-task">
           <div class="form-group">
             <label for="task-title">Task Name:</label>
@@ -93,23 +93,23 @@
          <label for="task_deadline">Task Deadline:</label>
          <input type="date" class="form-control" id="task_deadline" name = "deadline">
         </div>
-        
+
          <div class="form-group">
          <label for="task_Duedate">Task Duedate:</label>
          <input type="number" class="form-control" id="task_duedate" name = "duedate" min = 1>
         </div>
-        
+
          <div class="form-group">
          <label for="task_priority">Task Priority:</label>
          <input type="number" class="form-control" id="task_priority" name = "priority" min = "1" max = "5">
         </div>
-        
+
           <button class="btn btn-success">save</button>
-        </form> 
+        </form>
       </div>
       <div class="modal-footer">
         <button class="btn btn-warning" data-dismiss="modal">cancel</button>
-      </div>  
+      </div>
       </div>
     </div>
   </div>
@@ -129,16 +129,16 @@
           <li> <b>Description: </b> {{task_description}} </li> <br/>
           <li> <b>Deadline:</b> {{task_deadline}} </li><br/>
           <li> <b>Duedate: </b> {{task_duedate}}  </li><br/>
-          <li> <b>Priority: </b>{{task_priority}} </li><br/>    
+          <li> <b>Priority: </b>{{task_priority}} </li><br/>
          </ul>
               <center><p style = "display:{{task_complete}} font-size: 16px; color: darkgreen"><b>You have done it already
                   <span class="glyphicon">&#xe013;</span></b></p></center>
-         </div>          
+         </div>
       </div> <!-- End of thumbnail-->
     </div>   <!-- End of columns-->
    </div>    <!-- End of rows-->
    <center><a href = "/"><button class = "btn btn-success js-back"> back &#8617;</button></a></center>
- </div>     <!-- End of container-->        
+ </div>     <!-- End of container-->
 </template>
 
 
@@ -152,7 +152,7 @@
         <div class="modal-title">
         </div>
       </div>
-      <div class="modal-body">       
+      <div class="modal-body">
         <form class="js-Edit-task">
          {{#each task}}
           <div class="form-group">
@@ -167,27 +167,26 @@
          <label for="task_deadline">Task Deadline:</label>
          <input type="date" class="form-control" id="task_deadline"  value = {{task_deadline}} name = "deadline">
         </div>
-        
+
          <div class="form-group">
          <label for="task_Duedate">Task Duedate:</label>
          <input type="number" class="form-control" id="task_duedate" value = {{task_duedate}} name = "duedate" min = 1>
         </div>
-        
+
          <div class="form-group">
          <label for="task_priority">Task Priority:</label>
          <input type="number" class="form-control" id="task_priority" value = {{task_priority}} name = "priority" min = "1" max = "5">
         </div>
-        
+
           <button class="btn btn-success">save</button>
         {{/each}}
-        </form> 
+        </form>
       </div>
       <div class="modal-footer">
         <button class="btn btn-warning" data-dismiss="modal">cancel</button>
-      </div>  
+      </div>
       </div>
     </div>
   </div>
   </div>
 </template>
-
